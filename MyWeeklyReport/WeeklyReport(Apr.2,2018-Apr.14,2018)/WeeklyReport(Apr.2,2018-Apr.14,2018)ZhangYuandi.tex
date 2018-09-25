@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsmath}
+
+
+\title{Weekly Report(Apr.2,2018-Apr.14,2018)}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In the last two weeks, I have learned week7, week8, week9 courses of LAFF and learned more about the C++ programming language and \LaTeX.
+\end{abstract}
+
+\section{Work done these weeks}
+
+\subsection{LAFF}
+Courses I have learned in these weeks focus on Gaussian Elimination, Matrix Inversion, and Vector Spaces.
+
+\subsubsection{More about Gaussian Elimination}
+Last week,we apply Gaussian Elimination to reduce a system of linear equations into an upper triangular system of equations and if Gaussian elimination completes and the upper triangular factor U has no zeroes on the diagonal, then \emph{A$\chi$} = \emph{b} can be solved for all right-hand side vectors \emph{b}.\\
+Is this the only solution?\\
+Assume that \emph{A$\chi$} = \emph{b} has two solutions: \emph{u} and solutions: \emph{v}. Then\\
+\begin{itemize}
+\item[-]\emph{Au} = \emph{b} and \emph{Av} = \emph{b}.
+\item[-]This then means that vector \emph{w} = \emph{u - v} satisfies
+\begin{center}
+\emph{Aw = A(u - v) = Au - Av = b - b = }0.
+\end{center}
+\item[-]Since Gaussian Elimination completed we know that
+\begin{center}
+(LU)\emph{w} = 0,
+\end{center}
+or,equivalently,
+\begin{center}
+\emph{Lz = 0} and \emph{Uw = z}.
+\end{center}
+\end{itemize}
+The problem is "\emph{Does Gaussian Elimination always solve a linear system of n equations and n unknowns?}". The answer is no. There are cases where Gaussian Elimination breaks down.\\
+a simple example involves the matrix A = 
+\(
+\begin{pmatrix}
+    0 & 1\\
+    1 & 0  
+\end{pmatrix}
+\) which will cause a "division by zero" error.Thus, we should modify Gaussian Elimination by developing some machinery.
+
+\subsubsection{Permutations}
+A vector with integer components
+\begin{center}
+\emph{p} = 
+\(
+\begin{pmatrix}
+    \emph{k}_{0} \\
+    \emph{k}_{1} \\
+    \vdots \\
+    \emph{k}_{n-1} \\
+\end{pmatrix}
+\) 
+\end{center}
+is said to be a permutation vector if
+\begin{itemize}
+\item[-]\emph{k}$_{j}$ $\in$ {0,...,n-1},for 0 $\leq$ \emph{j} $<$ \emph{n};and
+\item[-]\emph{k$_{i}$ = k$_{j}$} implies \emph{i = j}.
+\end{itemize}
+In other words, p is a rearrangement of the numbers 0,...,n - 1(without repition).\\
+With permutations, we can add row swapping to Gaussian Elimination and we solve the linear system.
+
+\subsubsection{The Inverse Matrix}
+Like inverse function,let L : R$^{n}$ $\longrightarrow$ R$^{n}$ be a linear transformation that is a bijection and let L$^{-1}$ denote its inverse.And L$^{-1}$ is a linear transformation.Let A be the matrix that represents L.We can get that AA$^{-1}$ = \emph{I} and A$^{-1}$A = \emph{I}.And we can easily know that if P is a permutation matrix,then P$^{-1}$ = P$^{T}$. By making use of the inverse matrix, we can solve \emph{A$\chi$ = b} more easily.
+
+\subsubsection{Vector Spaces}
+
+There are cases where systems don't have a unique solution or have no solutions. Thus we need use sets.In mathematis, a set is defined as a collection of distinct objects.The set R$^{n}$ is a vector space:
+\begin{itemize}
+\item[-]0 $\in$ R$^{n}$.
+\item[-]If \emph{v,w} $\in $R$^{n}$ then \emph{v + w} $\in$ R$^{n}$.
+\item[-]If \emph{v} $\in$ R$^{n}$ and $\alpha$ $\in$ R then $\alpha$\emph{v} $\in$ R$^{n}$.
+\end{itemize}
+
+\subsubsection{Span, Linear Independence, and Bases}
+Let \{\emph{{v$_{0}$,v$_{1}$,...,v$_{n-1}$}}\} $\subset$ R$^{m}$. Then the span of these vectors, Span\{\emph{{v$_{0}$,v$_{1}$,...,v$_{n-1}$}}\}, is said to be the set of all vectors that are a linear combination of the given set of vectors.]\\
+Let \{\emph{{v$_{0}$,v$_{1}$,...,v$_{n-1}$}}\} $\subset$ R$^{m}$. Then this set of vectors is said to be linearly independent if \emph{$\chi$$_{0}$v$_{0}$ + $\chi$$_{1}$v$_{1}$ +...+ $\chi$$_{n-1}$v$_{n-1}$ =  }0  implies that $\chi$$_{0}$ = ... = $\chi$$_{n-1}$ = 0. A set of vectors that is not linearly independent is said to be linearly dependent.\\
+Let S be a subspace of R$^{m}$. Then the set \{\emph{{v$_{0}$,v$_{1}$,...,v$_{n-1}$}}\} $\subset$ R$^{m}$ is said to be a basis for S if \{\emph{{v$_{0}$,v$_{1}$,...,v$_{n-1}$}}\} are linearly indepenent and Span\{\emph{{v$_{0}$,v$_{1}$,...,v$_{n-1}$}}\} = S.
+
+\subsection{C++}
+I want to share my rough journey of using the graphics library named fltk.Firstly,installing it is the hardest step.Here I have to complain that VS Code is so inconvenient for me to use for the complex configuration.I still fail to use fltk with VS Code because it fail to find the files but I have checked that the path is added rightly. So, I have to use VS to use fltk. Yeah, VS is friendlier for the configuration of fltk is more easier. Although there are some errors at the beginning, I can use it by altering some syntax that doesn't be written suitably. At last, I still want to complain again that fltk is very inconvenient for me to use and I'm still learning how to use it.
+
+\subsection{\LaTeX}
+Thanks for my buddy that I can write nice matrix.I haven't come through some puzzling problems yet, and the only thing I want to ask here is that how to use the reference book about \LaTeX.For I don't use \LaTeX quite often, but when I come through some difficulties using it I sometimes fail to find the right answer for me. Should I print the reference book for sometimes it's hard for me to find the answer I want by looking through the pdf.And when I want to learn \LaTeX I sometimes feel at a loss for I think there are some many things I should learn and have no idea from where I should begin.
+
+\section{Plan for the next weeks}
+
+1.Learn the last three LAFF courses week10,week11,week12.\\
+2.Write a calculator by using fltk.\\
+3.Keep on learning how to use \LaTeX and I want to write down every problem I have fixed when using it.\\
+4.Learn the Unit 0, Unit 1 of Probability and Statistics.
+
+\end{document}

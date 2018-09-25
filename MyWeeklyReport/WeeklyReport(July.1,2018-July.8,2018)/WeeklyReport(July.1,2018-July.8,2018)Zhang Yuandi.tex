@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+
+\title{Weekly Report(July.1,2018-July.8,2018)}
+
+\author{Zhang Yuandi}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+In the last week, I have finished the course \emph{Divide and Conquer, Sorting and Searching, and Randomized Algorithms}, and learned week1 of \emph{Machine Learning}. Besides, I have learned further about data structure and finished \emph{Programming Foundations with JavaScript, HTML and CSS} to learn about HTML, CSS, and JavaScript.
+
+\end{abstract}
+\section{Work done in these weeks}
+\subsection{Algorithms}
+The courses discuss some classic algorithms with us.
+
+\subsubsection{Merge Sort}
+Merge sort is an efficient, general-purpose, comparison-based sorting algorithm. We can explain it as follows:\\
+$\rule{\textwidth}{0.3mm}$
+\begin{itemize}
+  \item recursively sort 1$^{st}$ half of the input array
+  \item recursively sort 2$^{nd}$ half of the input array
+  \item merge two sorted sublists into one
+\end{itemize}
+$\rule{\textwidth}{0.3mm}$
+Merge Sort requires $\leq 6n\log_2n + 6n$ operations to sort n numbers. It costs O($n \log n$).
+
+\subsubsection{Divide and Conquer}
+Divide and Conquer works by recursively breaking down a problem into two or more sub-problems of the same or related type, until these become simple enough to be solved directly.
+
+\subsubsubsection{Counting Inversions}\\
+Let's work on this problem:\\
+Input: array A containing the numbers 1,2,3,..,n in some arbitrary order\\
+Output: number of inversions $=$ number of pairs $(i,j)$ of array indices with
+$i < j$ and A[$i$] $>$ A[$j$]\\
+We can solve it with this:\\
+$\rule{\textwidth}{0.3mm}$
+Sort-and-Count(array A, length n)\\
+if n == 1, return 0\\
+else\\
+(B, X) = Sort-and-Count(1$^{st}$ half of A, n/2)\\
+(C, Y) = Sort-and-Count(2$^{nd}$ half of A, n/2)\\
+(D, Z) = CountSplitInv(A, n)\\
+return X + Y + Z\\
+$\rule{\textwidth}{0.3mm}$
+It costs O(n$\log n$).\\
+
+\subsubsubsection{Matrix Multiplication}\\
+When we are doing matrix multiplication, divide and conquer always make sense.Let
+\[ X = \begin{pmatrix}
+A & B\\
+C & D
+\end{pmatrix},
+Y = \begin{pmatrix}
+E & F\\
+G & H
+\end{pmatrix}\]
+Then,
+\[ XY = \begin{pmatrix}
+AE + BG & AF + BH\\
+CE + DG & CF + DH
+\end{pmatrix}\]
+With this algorithm, we can do matrix multiplication during a time which is better than cubic time.
+
+\subsubsubsection{Closest Pair}\\
+If we want to find out the pair of points that is closest, we can work like this:\\
+$\rule{\textwidth}{0.3mm}$
+ClosestPair(P$_x$, P$_y$)
+\begin{enumerate}
+  \item Let Q = left half of P, R = right half of P. From Q$_x$, Q$_y$, R$_x$, R$_y$
+  \item (q$_1$, p$_1$) = ClosestPair(Q$_x$, Q$_y$)
+  \item (q$_2$, p$_2$) = ClosestPair(R$_x$, R$_y$)
+  \item (q$_3$, p$_3$) = ClosestSplitPair(P$_x$, p$_y$)
+  \item return best of (q$_1$, p$_1$), (q$_2$, p$_2$), (q$_3$, p$_3$)
+\end{enumerate}
+$\rule{\textwidth}{0.3mm}$
+It costs $n\log n$.
+
+\subsubsection{Quick Sort}
+Quick Sort is an efficient sorting algorithm, serving as a systematic method for placing the elements of an array in order.We can work like this:\\
+$\rule{\textwidth}{0.3mm}$
+Partition(A, l, r)
+\begin{itemize}
+  \item p := A[l]
+  \item i := l + 1
+  \item for j = l+1 to r
+  \item if A[j] $<$ p\\
+   swap A[j] and A[i]\\
+   i := i + 1
+  \item swap A[l] and A[i-1]
+\end{itemize}
+$\rule{\textwidth}{0.3mm}$
+It costs O(n).
+
+\subsubsection{Linear-Time Selection}
+\subsubsubsection{Randomized Selection}\\
+Let's think about this problem:\\
+Input: array A with n distinct numbers and a number\\
+Output: i$^{th}$ order statistic\\
+We can solve it with randomized selection:\\
+$\rule{\textwidth}{0.3mm}$
+Rselect(array A, length n, order statistic i)
+\begin{enumerate}
+  \item If n == 1, return A[1]
+  \item Choose pivot p from A uniformly at random
+  \item Partition A around p let j = new index of p
+  \item If j == i, return p
+  \item If j $>$ i, return Rselect(1$^{st}$ part of A, j-1, i)
+  \item If j $<$ i, return Rselect(2$^{nd}$ part of A, n-j, i-j)
+\end{enumerate}
+$\rule{\textwidth}{0.3mm}$
+It costs O(n).
+
+\subsubsubsection{Deterministic Selection}\\
+To fix on the same problem as before, we can do this deterministic selection:\\
+$\rule{\textwidth}{0.3mm}$
+Dselect(array A, length n, order statistic i)
+\begin{enumerate}
+  \item Break A into 5 groups, sort each group
+  \item C = the n/5 "middle elements"
+  \item p = Dselect(C, n/5, n/10)
+  \item Partition A around p
+  \item If i == j, return p
+  \item If j $<$ i, return Dselect(1$^{st}$ part of A, j-1, i)
+  \item If j $>$ i, return Dselect(2$^{nd}$ part of A, n-j, i-j)
+\end{enumerate}
+$\rule{\textwidth}{0.3mm}$
+It costs O(n).
+
+\subsection{Machine Learning}
+The course in week1 helps me have a taste of machine learning, which seems mysterious and interesting to me. I have learned some essential knowledge of machine learning.
+
+\subsubsection{Definition}
+In Arthur Samuel's opinion, machine learning is a field of study that gives computers the ability to learn without being explicitly programmed. In Tom Mitchell's opinion, well-posed learning problem is that a computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E. Two main algorithms of machine learning is supervised learning and unsupervised learning.
+
+\subsubsection{Supervised Learning and Unsupervised Learning}
+Supervised learning is that the "right answer is given". It can be divided into regression learning(predict continuous valued output) and classification learning(predict discrete valued output). Unsupervised learning deals with "unlabeled" data.
+
+\subsubsection{Cost Function}
+To measure how our algorithm works, we can define cost function to help us:
+\begin{itemize}
+  \item Hypothesis: $h_\theta(x) = \theta_0 + \theta_1x$
+  \item Parameters: $\theta_0, \theta_1$
+  \item Cost Function: $J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^{(i)}-y^{(i)})^2)$ 
+  \item Goal: minimize $J(\theta_0, \theta_1)$
+\end{itemize}
+
+\subsubsection{Gradient Descent}
+The basic idea is 
+\begin{itemize}
+  \item Start with $\theta_0, \theta_1$
+  \item Keep changing $\theta_0, \theta_1$ to reduce $J(\theta_0, \theta_1)$ until we hopefully end up at a minimum
+\end{itemize}
+If there is just one single parameter, we can work like this\\
+repeat until convergence{\\
+\[\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)(for\; j=0\; and\; j=1)\]
+}\\
+Keep in mind that $\theta_0, \theta_1$ should be updated simultaneously. \\
+And the linear regression case \\
+repeat until convergence{\\
+\[\theta_0 := \theta_0 - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})\]
+\[\theta_1 := \theta_1 - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x^{(i)}) - y^{(i)})\cdot x^{(i)}\]
+}\\
+Update both $\theta_0, \theta_1$ simultaneously as well.
+
+\subsection{Data Structure}
+I have learned three important trees. Those trees are very efficient when we confront with complex problems.
+
+\subsubsection{AVL Tree}
+An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property.
+
+\subsubsection{Splay Tree}
+A splay tree is a self-adjusting binary search tree with the additional property that recently accessed elements are quick to access again. Splaying the tree for a certain element rearranges the tree so that the element is placed at the root of the tree.
+
+\subsubsection{RedBlack tree}
+A RedBlack tree is a kind of self-balancing binary search tree in computer science. Each node of the binary tree has an extra bit, and that bit is often interpreted as the color (red or black) of the node.
+
+\subsection{JavaScript, HTML and CSS}
+I have a lot of fun using JavaScript, HTML and CSS to make my web look nice. JavaScript is a high-level, interpreted programming language. HTML is the standard markup language for creating web pages and web applications. And CSS is a style sheet language used for describing the presentation of a document written in a markup language like HTML. The website \href{https://codepen.io/#}{CodePen} is really cool. And I am trying to rewrite wordladder with JavaScript, although it seems quite a long way to go.
+
+\section{Plans for Next Week}
+\begin{enumerate}
+  \item Learn the course of week2, week3, week4 of \textbf{Machine Learning}.
+  \item Learn more about JavaScript and data structure.
+  \item Learn about detection networks.
+\end{enumerate}
+
+\end{document}

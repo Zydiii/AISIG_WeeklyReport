@@ -1,0 +1,205 @@
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+
+\title{Weekly Report(Apr.30,2018-May.13,2018)}
+
+
+\author{Zhang Yuandi}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+Sorry for my delayed submit of Weekly Report due to midterm examination review. In the last two weeks, I have finished the last three weeks of \textbf{Linear Algebra} and learned the first two units of \textbf{Introduction to Probability}.
+\end{abstract}
+
+\section{Work done in these weeks}
+
+\subsection{Linear Algebra}
+
+The last courses focus on Orthogonality and Eigenvalues.
+
+\subsubsection{Orthogonality}
+
+\subsubsubsection{Orthogonal Vectors}
+
+Vectors x and y are considered to be orthogonal ( Perpendicular ) if they meet at a right angle. Using the Euclidean length
+\begin{center}
+$\Vert$x$\Vert$$_{2}$ = $\sqrt{\emph{x$^{2}$$_{0}$ + x$^{2}$$_{1}$ + ... + x$^{2}$$_{n-1}$}}$ = $\sqrt{\emph{x$^{T}$x}}$
+\end{center}
+we find that the Pythagorean Theorem dictates that if the angle in the triangle where \emph{x} and \emph{y} meet is a right angle, then \emph{$\Vert$z$\Vert$$_{2}$$^{2}$ = $\Vert$x$\Vert$$_{2}$$^{2}$ +  $\Vert$y$\Vert$$_{2}$$^{2}$}. In this case, we can get that \emph{x$^{T}$y} = 0.
+
+\subsubsubsection{Orthogonal Spaces}
+
+Let \textbf{V, W} $\subset$ R$^{n}$ be subspaces. Then \textbf{V} and \textbf{W} are said to be orthogonal if and only if $v$ $\in$ \textbf{V} and $w$ $\in$ \textbf{W} implies that \[ v^Tw = 0\].We will use the notation \textbf{V} $\bot$ \textbf{W} to indicate that subspace \textbf{V} is orthogonal to subspace \textbf{W}.In other words: Two subspaces are orthogonal if all the vectors from one of the subspaces are orthogonal to all of the vectors from the other subspace.
+
+\subsubsubsection{Solving the Normal Equations}
+
+We have solved the normal equations \[ A^TAx = A^Tb,\] where A $\in$ R$^{m*n}$ has linear independent columns, via the following steps:
+\begin{itemize}
+\item
+Form $y = A^Tb$.
+\item
+Form $A^TA$.
+\item
+Invert $A^TA to compute B = (A^TA)^{-1}$.
+\item
+Compute $\hat{x} = By = (A^TA)^{-1}A^Tb$.
+\end{itemize}
+Then, let's focus on how to use the Cholesky factorization. Here are the steps:
+\begin{itemize}
+\item
+Compute $C = A^TA$.
+\item
+Compute the Cholesky factorization $C = LL^T$, where L is lower triangular.
+\item
+Compute the Cholesky factorization $C = LL^T$, where L is lower triangular.This allows us to ake advantage of symmetry in C.
+\item
+Compute $y = A^Tb$.
+\item
+Solve $Lz = y$.
+\item
+Solve $L^T\hat{x} = z$.
+\end{itemize}
+The vector $\hat{x}$ is then the best solution (in the linear least-squares sense) to $Ax\approx b$.That is, a symmetric matrix $C \in R^{m*n}$ is said to be symmetric positive definite if $x^TCx \geq 0$ for all nonzero vectors $x \in R^m.$
+
+\subsubsubsection{Orthonormal Bases}
+Let $q_0,q_1,...,q_{k-1} \in R^{m}.$ Then these vectors are (mutually) orthonormal id for all $0 \leq i,j < k$ \[ q_i^Tq_j = \left\{ \begin{array}{ll}
+1 & \mbox{if $i = j$}\\
+0 & \mbox{$otherwise$}.\end{array} \right. \]
+And how to get orthogonal bases? We can get them by \textbf{Gram-Schmidt orthogonalization}.\[a_k^{\perp} = a_k - q_0^Ta_kq_0 - q_1^Ta_kq_1 - ... q_k-1^Ta_kq_{k-1}.\] Take $a_k^{\perp}$, the component of $a_k$ orthogonal to $q_0, q_1,...q_{k-1}$, and make it of unit length:\[q_k = a_k^\perp/\parallel a_k^{\perp}\parallel_2,\] And we will see that Span(${a_0, a_1,..., a_k}$) = Span(${q_0, q_1,..., q_{k-1}}$).
+
+\subsubsection{Eigenvalues}
+
+\subsubsubsection{The Algebraic Eigenvalue Problem}
+The algebraic eigenvalue problem is given by \[ Ax = \lambda x.\]And here are some equivalent statements:
+\begin{itemize}
+\item
+Ax = $\lambda$ x, where x $\neq$ 0.
+\item
+Ax - $\lambda$ x = 0, where x $\neq$ 0.
+\item
+Ax - $\lambda$ Ix = 0, where x $\neq$ 0.
+\item
+(A - $\lambda$ I)x = 0, where x $\neq$ 0.
+\item
+A - $\lambda$ I is singular.
+\item
+N(A - $\lambda$ I) contains a nonzero vector x.
+\item
+dim(N(A - $\lambda$ I)) $>$ 0.
+\end{itemize}
+If we find a vector $\neq$ 0 such that $Ax = \lambda x$, it is certainly not unique.
+\begin{itemize}
+\item
+For any scalar $\alpha$, $A(\alpha x) = \lambda(\alpha x)$ also holds.
+\item
+If $Ax = \lambda x$ and $Ay = \lambda y$, then $A(x+y) = Ax + Ay = \lambda x + \lambda y = \lambda(x+y)$.
+\end{itemize}
+We conclude that the set of all vectors $x$ that vectors $x$ that satisfy $Ax = \lambda x$ is a subspace.
+
+\subsubsubsection{Practical Methods for Computing Eigenvectors and Eigenvalues}
+
+Let us assume that $A$ $\in$ $\mathbb{R}$$^{m*n}$ is diagonalizable so that
+\[A = V\Lambda V^{-1} = ( \upsilon_0 \ \ \upsilon_1 \ \ \cdots \ \ \upsilon_{n-2} \ \ \upsilon_{n-1} )\begin{pmatrix}
+\lambda_1 & 0 & \cdots & 0 & 0\\
+0 & \lambda_1 & \cdots & 0 & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & \lambda_{n-2} & 0\\
+0 & 0 & \cdots & 0 & \lambda_{n-1}
+\end{pmatrix}
+( \upsilon_0 \ \ \upsilon_1 \ \ \cdots \ \ \upsilon_{n-2} \ \ \upsilon_{n-1} )^{-1}\]
+This means that $\upsilon_i$ is an eigenvector associated with $\lambda_i$.Then, we start with some vector $x^{(0)}$ $\in$ $\mathbb{R}^n$. Since \textbf{V} is nonsingular, the vectors $\upsilon_0, \ldots, \upsilon_{n-1}$ form a linearly independent bases for $\mathbb{R}^n$. Hence,
+\[x^{(0)} = \gamma_0\upsilon_0 + \gamma_1\upsilon_1 + \cdots + \gamma_{n-2}\upsilon_{n-2} + \gamma_{n-1}\nu_{n-1} =
+\begin{pmatrix}
+ \nu_0&\nu_1&\cdots&\nu_{n-2}&\nu_{n-1}
+ \end{pmatrix}
+ \begin{pmatrix}
+ \gamma_0 \\
+ \gamma_1 \\
+ \vdots \\
+ \gamma_{n-2} \\
+ \gamma_{n-1}
+ \end{pmatrix}
+ = Vc.\]
+ Now, we generate
+ \[x^{(1)} = A^{-1}x^{(0)}\]
+ \[x^{(2)} = A^{-1}x^{(1)}\]
+ \[x^{(3)} = A^{-1}x^{(2)}\]
+ \begin{center}$\vdots$\end{center}
+ Then, we can get
+ \[x^{(k)} = A^{-1}x^{(k-1)} = (A^{-1})^2x^{(k-2)} = \cdots = (A^{-1})^kx^{(0)}.\]
+ \[x^{(1)} = \lambda_{n-1}A^{-1}x^{(0)}\]
+ \[x^{(2)} = \lambda_{n-1}A^{-1}x^{(1)}\]
+ \[x^{(3)} = \lambda_{n-1}A^{-1}x^{(2)}\]
+ \begin{center}$\vdots$\end{center}
+ Then,\[x^{(k)} = \gamma_{0}|\frac{\lambda_{n-1} - \mu}{\lambda_{0} - \mu}|^k\nu_0 + \gamma_{1}|\frac{\lambda_{n-1} - \mu}{\lambda_{1} - \mu}|^k\nu_1 + \cdots + \gamma_{n-2}|\frac{\lambda_{n-1} - \mu}{\lambda_{n-2} - \mu}|^k\nu_{n-2} + \gamma_{n-1}\nu_{n-1}\]
+ If we knew $\nu_{n-1}$ but not $\lambda_{n-1}$, then we could compute the Rayleigh quotient:\[\lambda_{n-1} = \frac{\nu_{n-1}^TA\nu_{n-1}}{\nu_{n-1}^T\nu_{n-1}}.\]
+ And by using the approximation we can pick \[\mu = \frac{x^{(k)T}Ax^{(k)}}{x^{(k)T}x^{(k)}} \approx \lambda_{n-1}\]
+
+ \subsection{Probability}
+
+ The world is filled with uncertainty, and probability is a part of scientific literacy. With probability, we are able to fight with randomness as much as we can. The first two units focus on some basic models and  axioms.
+ \subsubsection{Sets}
+
+ Sets is a collection of distinct elements. If can contain both finite and infinite elements. We can get the unions or intersections of different sets.
+ \subsubsection{Probability Models and Axioms}
+
+ \begin{itemize}
+ \item
+ The \textbf{sample space} $\Omega$ is the set of all possible outcomes of an experiment.
+ \item
+ The \textbf{probability law}, which assigns to a set A of possible outcomes (also called an event) a nonnegative number P(A)(called the probability of A).
+ \item
+ P(A) $\geq$ 0, for every event A.
+ \item
+ If the sample space has an infinite number od elements and A$_{1}$, A$_{2}$, $\ldots$ is a sequence of disjoint events, then the probability of there union satisfies\\
+ P(A$_{1}$ $\bigcup$ A$_{2}$ $\bigcup$ $\cdots$) = P(A$_{1}$) + P(A$_{2}$) + $\cdots$.
+ \item
+ P($\Omega$) = 1.
+ \item
+ The probability of any event ${s_1, s_2, \ldots, s_n}$ is the sum of the probability of its elements:\[P({s_1, s_2, \ldots, s_n}) = P(s_1) + P(s_2) + \cdots + P(s_n).\]
+ \item
+ If the sample space consists of $n$ possible outcomes which are equally likely, then\[P(A) = \frac{number \ \ of\ \ elements\ \ of\ \ A}{n}.\]
+ \end{itemize}
+
+ \subsubsection{Some Properties of Probability Laws}
+ Let A, B and C be events.
+ \begin{description}
+ \item[(a)]
+ If A $\subset$ B, then P(A) $\leq$ P(B).
+ \item[(b)]
+ P(A $\bigcup$ B) = P(A) + P(B) - P(A $\bigcap$ B).
+ \item[(c)]
+ P(A $\bigcup$ B) $\leq$ P(A) + P(B).
+ \item[(d)]
+ P(A $\bigcup$ B $\bigcup$ C) = P(A) + P(A$^{c}$$\bigcap$b) + P(A$^{c}$$\bigcap$B$^{c}$$\bigcap$C).
+ \end{description}
+
+
+ \subsection{\LaTeX}
+
+ Thanks for the handbook my buddy recommended, it is much more convenient and interesting for me to use \LaTeX and it helps me understand how \LaTeX works better. It really helps me a lot and I'm very appreciated to it. I have looked through some pages of the handbook but not finished.
+
+\section{Questions for My Studying Pace}
+
+I planned to learn every basic course the training pdf mentions, but it seems to be quite a lot and some courses I have learned already in SJTU. And I'm running out of time for this semester is reaching its ending. I'm afraid that I don't have enough time to finish the training. How should I adjust my studying pace?
+\section{Plan for the Next Weeks}
+
+\begin{enumerate}
+\item
+Learn the unit2, unit3, unit4, unit5, unit6 courses of \textbf{Probability}.
+\item
+Learn the course \textbf{How to Use Git and GitHub}
+\end{enumerate}
+
+\end{document}

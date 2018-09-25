@@ -1,0 +1,242 @@
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsfonts,amssymb}
+
+\title{Weekly Report(May.14,2018-May.27,2018)}
+
+
+\author{Zhang Yuandi}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+In the two weeks, I have learned the Unit2, Unit3, Unit4, Unit5, Unit6 of \textbf{Introduction to Probability - The Science of Uncertainty} and \textbf{How to Use Git and GitHub}.
+\end{abstract}
+\section{Work done in these weeks}
+\subsection{Probability}
+
+The courses focus on Conditioning and Independence, Counting, Discrete Random Variables, Continuous Random Variables. And I listed some useful formulas below for reference later days.
+\subsubsection{Conditioning and Independence}
+
+Conditioning leads to revised ("conditional") probabilities that take into account partial information on the outcome of a probabilistic experiment. Independence is used to model situations involving non-interacting probabilistic phenomena and also plays an important role in building complex models from more elementary ones.
+\subsubsubsection{Conditioning Probability}
+\begin{itemize}
+\item
+
+The conditional probability of an event A, given an event B with P(B) $>$ 0, is defined by\[P(A|B)=\frac{P(A\bigcap B)}{P(B)},\]and specifies a new (conditional) probability law on the same sample space $\Omega$. In particular, all properties of probability laws remain valid for conditional probability laws.
+\item
+
+Let $A_1,...,A_n$ be disjoint events that form a partition of the sample space and assume that $P(Ai)>0$, for all i. Then, for any event B, we have \[P(B) = P(A_1\bigcap B)+\cdots+P(A_n\bigcap B) = P(A_1)P(B|A_1)+\cdots+P(A_n)P(B|A_n).\](A question about \LaTeX, the $\bigcap$ or $\bigcup$ looks a little bigger than other symbols, which makes it weird. Is the $\bigcap$ or $\bigcup$ just looks like this, or I use it in a wrong way?)
+
+\item
+$P(A_i|B)=\frac{P(A_i)P(B|A_i)}{\sum_j P(A_j)P(B|A_j)}$
+
+\end{itemize}
+\subsubsubsection{Independence}
+
+Two events A and B are said to be independent if \[P(A\bigcap B) = P(A)P(B).\]If in addition, $P(B) > 0$, independence is equivalent to the condition \[P(A|B) = P(A).\]If A and B are independent, so are A and B$^c$.
+And two events A and B are said to be conditionally independent, given another event C with $P(C) > 0$, if \[P(A\bigcap B|C) = P(A|C)P(B|C).\]If in addition, $P(B\bigcap C) > 0,$ conditional independence is equivalent to the condition \[P(A|B\bigcap C) = P(A|C).\]
+We say that the events $A_1, A_2,\ldots A_n$ are independent if \[P(\bigcap\limits_{i\in S} A_i) = \prod\limits_{i\in S} P(A_i).\]
+
+\subsubsection{Counting}
+
+\begin{itemize}
+\item
+
+Permutations of $n$ objects: $n!$.
+\item
+
+k-permutations of $n$ objects: $n!/(n - k)!$.
+\item
+
+Combinations of $k$ out of n objects:$\binom{n}{k} = \frac{n!}{k!(n-k)!}.$
+\item
+
+Partitions of $n$ objects into $r$ groups, with the $i$th group having $n_i$ objects:
+\[\binom{n}{n_1,n_2,\ldots,n_r} = \frac{n!}{n_1!n_2!\cdots n_r!}.\]
+\end{itemize}
+\subsubsection{Discrete Random Variables}
+
+\textbf{A random variable} is a real-valued function of the outcome of the experiment, and a function of a random variable defines another random variable. \textbf{A discrete random variable} is a real-valued function of the outcome of the experiment that can take a ?nite or countably in?nite number of values, and a function of a discrete random variable de?nes another discrete random variable. A discrete random variable has an associated \textbf{probability mass function (PMF)}, which gives the probability of each numerical value that the random variable can take.
+\subsubsubsection{Expectation}
+
+\[E[X] = \sum\limits_{x}xp_{X}(x)\]
+\[E[g(X)] = \sum\limits_{x}g(x)p_{X}(x)\]
+\begin{center}
+Let $Y = aX +b$, then $E[X] = aE[X] + b$.
+\end{center}
+
+\subsubsubsection{Variance}
+
+\[var(X) = E[(X - E[X])^2]\]
+\[var(X) = \sum\limits_{x}(x - E[X])^2p_{X}(x)\]
+\[var(X) = E[X^2] - (E[X])^2\]
+\begin{center}
+Let $Y = aX +b$, then $var(Y) = a^2var(X)$.
+\end{center}
+
+\subsubsubsection{Joint PMFs}
+
+\begin{center}
+$p_{X,Y}(x,y) = P(X = x,Y = y).$
+\end{center}
+\begin{itemize}
+\item
+
+$p_{X}(x) = \sum\limits_yp_{X,Y}(x,y), p_{Y}(y) = \sum\limits_xp_{X,Y}(x,y).$
+\item
+
+$E[g(X,Y)] = \sum\limits_x\sum\limits_y g(x,y)p_{X,Y}(x,y)$ 
+\item
+
+If $g$ is linear, of the form $aX + bY +c$, we have $E[aX + bY + c] = aE[X] + bE[Y] + c.$
+\end{itemize}
+
+\subsubsubsection{Conditional PMFs}
+
+Conditional PMFs are similar to ordinary PMFs, but pertain to a universe where the conditioning event is known to have occurred.
+\begin{itemize}
+\item
+
+$p_{X|A}(x) = P(X = x|A), \sum\limits_xp_{X|A}(x) = 1.$
+\item
+
+$p_X(x) = \sum\limits_{i=1}^nP(A_i)p_{X|A_i}(x), p_{X|B}(x) = \sum\limits_{i=1}^nP(A_i|B)p_{X|A_i\bigcap B}(x).$
+\item
+
+$p_X(x) = \sum\limits_yp_Y(y)p_{X|Y}(x|y).$
+\end{itemize}
+\subsubsubsection{Conditional Expectations}
+
+\begin{itemize}
+\item
+
+$E[X|A] = \sum\limits_xxp_{X|A}(x), E[g(X)|A] = \sum\limits_xg(x)p_{X|A}(x)$
+\item
+
+$E[X|Y = y] = \sum\limits_xxp_{X|Y}(x|y)$
+\item
+
+$E[X] = \sum\limits_{i=1}^nP(A_i)E[X|A_i], E[X|B] = \sum\limits_{i=1}^nP(A_i|B)E[X|A_i\bigcap B]$
+\item
+
+$E[X] = \sum\limits_yp_Y(y)E[X|Y = y]$
+\end{itemize}
+
+\subsubsubsection{Independent Random Variables}
+X is independent of the event A if \[p_{X|A} = p_X(x).\]X and Y are independent if for all pairs (x,y), the events {X = x} and {Y = y} are independent, or equivalently \[p_{X,Y}(x,y) = p_X(x)p_Y(y).\]Then we can get $E[XY] = E[X]E[Y]$, $E[g(X)h(Y)] = E[g(x)]E[h(Y)]$, and $var(X + Y) = var(X) + var(Y).$
+\subsubsection{Continuous Random Variables}
+\subsubsubsection{Expectation}
+\begin{itemize}
+\item
+
+$E[X] = \int_{-\infty}^{\infty}xf_X(x)dx.$
+\item
+
+$E[g(X) = \int_{-\infty}^{\infty}g(x)f_X(x)dx].$
+\item
+
+$var(X) = E[(X - E[X])^2] = \int_{-\infty}^{\infty}(x - E[X])^2f_X(x)dx.$
+\item
+
+If $Y = aX + b$, where $a$ and $b$ are given scalars, then $E[Y] = aE[X] + b, var(Y) = a^2var(X).$
+\end{itemize}
+
+\subsubsubsection{Joint PDFs}
+
+\begin{itemize}
+\item
+
+$P((X,Y)\in B) = \int\!\!\!\int\limits_{(x,y)\in B} f_{X,Y}(x,y)dx dy.$ (I'm greeted with a problem here, how can I type the condition $(x,y)\in B$ under both $\int\!\!\!\int$? I can only put it under the latter $\int$, which makes it look weird.)
+\item
+
+$f_X(x) = \int_{-\infty}^{\infty}f_{X,Y}(x,y)dy, f_Y(y) = \int_{-\infty}^{\infty}f_{X,Y}(x,y)dx$
+\item
+
+$f_{X,Y}(x,y) = \frac{\partial^2F_{X,Y}}{\partial x\partial y}(x,y)$
+\item
+
+$E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x,y)f_{X,Y}(x,y)dx dy$
+\end{itemize}
+
+\subsubsubsection{Conditional PDF}
+
+\begin{itemize}
+\item
+
+$P(X\in B|A) = \int_Bf_{X|A}(x)dx$
+\item
+
+$f_{X|{X\in A}(x)} = \left\{ \begin{array}{ll}
+\frac{f_X(x)}{P(X\in A),} & \mbox{if $x\in A,$}\\
+0, & \mbox{$otherwise.$}\end{array} \right.$
+\item
+
+$F_X(x) = \sum\limits_{i=1}^nP(A_i)f_{X|A_i}(x)$
+\end{itemize}
+\subsubsubsection{Independence}
+\begin{itemize}
+\item
+
+$X$ and $Y$ are independent if $f_{X,Y} = f_X(x)f_Y(y),$ for all $x,y$.
+\item
+
+$E[XY] = E[X]E[Y], E[g(X)h(Y)] = E[g(X)]E[h(Y)].$
+\item
+
+$var(X + Y) = var(X) + var(Y).$
+\end{itemize}
+\subsubsubsection{Bayes' Rule}
+
+Let $X$ and $Y$ be two random variables.
+\begin{itemize}
+\item
+
+If $X$ and $Y$ are discrete, we have all $x,y$ with $p_X(x)\neq 0, p_Y(y)\neq 0$,\[p_X(x)p_{Y|X}(y|x) = p_Y(y)p_{X|Y}(x|y),\]and the terms on the two sides in this relation are both equal to $p_{X,Y}(x,y)$.
+\item
+
+If $X$ is discrete and Y is continuous, we have for all $x,y$ with $p_X(x)\neq 0, f_Y(y)\neq 0,$\[p_X(x)f_{Y|X}(y|x) = f_Y(y)p_{X|Y}(x|y),\]and the terms on the two sodes in this relation are both equal to\[\lim_{\delta\rightarrow 0}\frac{P(X = x, y\leq Y\leq y + \delta)}{\delta}\]
+\item
+
+If $X$ and $Y$ are continuous, we have for all $x,y$ with $f_X(x)\neq 0, f_Y(y)\neq 0$,\[f_X(x)f_{Y|X}(y|x) = f_Y(y)f_{X|Y)(x|y)},\]and the terms on the two sides in this relation are both equal to \[\lim_{\delta\rightarrow}\frac{P(x\leq X\leq x + \delta, y\leq Y\leq y + \delta)}{\delta^2}\]
+\end{itemize}
+
+\subsection{Git and GitHub}
+
+Git is a version control system for tracking changes in computer files and coordinating work on those files among multiple people. And GitHub is a web-based hosting service for version control using git. I have got a lot of fun learning it, and will write down some helpful knowledge.
+\subsubsection{Navigating a Commit History}
+
+When we write codes for a big project, many changes can be made every time we modify them. What if we mistakenly delete one line among the thousands of lines? Well, we can use \textbf{git diff} to find the differences between two different files. But it is impossible to save every changed file on our computer, so we can use git to navigate a commit history. Use \textbf{git add} and \textbf{git commit} to commit the changed files when we make a logical change and write down the theme of change. Use \textbf{git log} to look through the commit history and \textbf{git checkout} to go to the fixed commit history. Use \textbf{git clone} to clone a repository on your computer.
+\subsubsection{Creating and Modifying a Repository}
+
+We can create and modify our own repository. Use \textbf{git init} to initiate a repository, and use \textbf{git add} to add the files to the staging area, use \textbf{fit commit} to commit them. We can use \textbf{git status} to find the states of our repository. Sometimes, we can create branches when we want to do some experiments. Use \textbf{git branch} to see which branch we are on, and \textbf{git branch branch-name} to create a new branch. We can use \textbf{git checkout} to move to the new branch. And \textbf{git log --graph} help use visualize the branch structure. Use \textbf{git merge} to merge two branches and \textbf{git branch -d} to delete a branch(it will only delete the label).
+\subsubsection{Using GitHub to Collaborate}
+
+GitHub is quite nice. We create a repository on GitHub and use \textbf{git remote add URL} to make a remote. Use \textbf{git remote -v} to see the information of it. We can use \textbf{git push} and \textbf{git pull} for pushing and pulling, and \textbf{git fetch} updates the local copy of the remote branch, leaving our actual local version alone. On GitHub, \textbf{forking} is like \textbf{git clone}. And we can make a pull request or merge a pull request on the GitHub. Well, it is quite interesting. If we don't want to enter password every time, use \textbf{git config --global credential.helper wincred} to store the password.
+
+There should be much more problems when I start using git and GitHub for my work and there are many other commands I haven't use yet. Hope for that day I can really create a big repository and push helpful codes.
+\subsection{C++}
+
+Recently I use C++ to do the n-gram by using the \emph{hamlet.txt}. Well, it is quite amazing in some way. Firstly, store the n-1 words and the n$_{th}$ word that follows them by using \emph{map}. Secondly, make a random start position, and store the n-1 words. Thirdly, make a random start position of the n$_{th}$ word, store it, delete the first word of the n-1 words, add the chosen n$_{th}$ word and repeat the process. I can make the output sentences seem like the way William Shakespeare speaks. However, the outcome isn't satisfying, for the sentence doesn't read smoothly sometimes and can't always output the whole sentence. Well, I will modify my algorithm later days.
+\subsection{\LaTeX}
+
+Well, something wrong seems to happen to my WinEdt. Every time I save my tex, it sends a warning '\emph{Some characters were lost while converting from UNICODE to CP 0. Save to file anyway?}'. I haven't figure out why this will happen.
+\section{Plans for Next Weeks}
+\begin{enumerate}
+\item
+
+Learn unit7, unit8, unit9, unit10 of \textbf{Introduction to Probability - The Science of Uncertainty}.
+\item
+
+Learn the course \textbf{Algorithms}.
+\end{enumerate}
+\end{document}

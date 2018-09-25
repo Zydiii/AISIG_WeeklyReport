@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{nips15submit_e,times}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsmath}
+
+
+\title{Weekly Report(Mar.19,2018-Apr.1,2018)}
+
+
+\author{Zhang Yuandi}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+In the last two weeks,I have learned the Week4,Week5,and Week6 courses of \textbf{Linear Algebra:Foundations to Frontiers Notes to LAFF With}.Besides,I have wrote some \textbf{C++} programs and learned more about \textbf{LaTex}.  
+\end{abstract}
+
+\section{Work done in these weeks}
+
+\subsection{Linear Algebra}
+
+In these weeks,the courses focus on multiplication of both matrix-vector and matrix-matrix,as well as Gaussian Elimination.
+\subsubsection{Multiplication}
+
+\subsubsubsection{Partitioned Matrix-Vector Multiplication}
+
+We can do partition just like we do slicing and dicing in Week1.We can simplify the multiplication to some extent.But we should bear it in mind that matrix-vector multiplication only works if the sizes of matrices and vectors being multiply match.So,a partitioning of A,x,and y,when performing a given operation,is conformal if the suboperations with submatrices and subvectors that are encountered make sense.
+
+\subsubsubsection{Transposing a partitioned Matrix}
+
+Similarly,let A$\in$R$^{m*n}$ be partitioned as follows:
+\begin{equation}  
+A=\left(              
+  \begin{array}{ccc} 
+    A00 & A01 & A02\\ 
+    A10 & A11 & A12\\ 
+    A20 & A21 & A22\\
+  \end{array}
+\right) 
+\end{equation}
+Transposing a partitioned matrix means that we view each submatrix as if it is a scalar,and we then transpose the matrix as if it is a matrix of scalarts.But then we recognize that each of those scalars is actually a submatrix and you also transpose that submatrix.
+
+\subsubsubsection{Matrix-Matrix Multiplication}
+Let A$\in$R$^{m*n}$,B$\in$R$^{k*n}$,and C$\in$R$^{m*n}$.Then the matrix-matrix multiplication C=AB is computed by
+\begin{center}
+   $\gamma$$_{i,j}$=$\sum_{p=0}^{k-1}$ $\alpha$$_{i,p}$$\beta$$_{p,j}$=$\alpha$$_{i,0}$$\beta$$_{0,j}$+$\alpha$$_{i,1}$$\beta$$_{1,j}$+...+$\alpha$$_{i,2}$$\beta$$_{2,j}$.
+\end{center}
+As a result of this definition Cx=A(Bx)=(AB)x and can drop the parentheses,unless they are useful for clarify:Cx=ABx and C=AB.
+
+\subsubsubsection{Matrix-Matrix Multiplication by Columns}
+Let
+\begin{center}
+C=(c$_0$$\mid$c$_1$$\mid$...$\mid$c$_2$$\mid$) and B=(b$_0$$\mid$b$_1$$\mid$...$\mid$b$_2$$\mid$)
+\end{center}
+so that 
+\begin{center}
+(c$_0$$\mid$c$_1$$\mid$...$\mid$c$_2$$\mid$)=C=AB=A(b$_0$$\mid$b$_1$$\mid$...$\mid$b$_2$$\mid$)=(Ab$_0$$\mid$Ab$_1$$\mid$...$\mid$Ab$_2$$\mid$).
+\end{center}
+
+\subsubsection{Gaussian Elimination}
+This method is just like the way we solve equations usually.But it refreshes me that we can converse the question into something about matrix.We can solve Ax=b via LU factorization,which means a matrix A$\in$R$^{n*n}$ can be factored into the product of two matrices L,U$\in$R$^{n*n}$:
+\begin{center}
+A=LU,
+\end{center}
+where L is unit lower triangular and U is upper triangular.\\
+Then,we should just solve Lz=b and Ux=b,which is more simple for lower and upper triangular.At last,we put it all together to solve Ax=b.
+
+\subsection{C++}
+I feel that what I have learned about C++ are just trifles and it is hard to list them orderly.What I want to share is a calculator implemented by me,although with some bugs that I haven't thought out a solution to.
+
+\subsubsection{Priority of Operations}
+I create some functions for operations.Function primary() deals with the number,positive sign,negative sign,bracket,factorial and ANS(it is used to store the result of last calculation).Function term() deals with '*','/','\%'.Function expression() deals with '+','-'.
+By using recursion in every function,it can do calculating rightly.
+
+\subsubsection{Read}
+There need to be some functions that can read what we have input one by one,and it can back sometimes.And we need to store what we have input,both value and kind.Thus,I create a structure Token which can store the value and kind and class Token\_stream for reading.
+
+\subsubsection{Error Report}
+I have to say that the types of error are some many that I can never say my calculator works without bugs.I mainly do error report in default(in switch-case).If there are some illegal inputs it will turns to the default part and sends out messages of error and reruns.
+
+\subsubsection{Some Parts Need Improving}
+My calculator can deal with some simple operation can report error.But I am trying to make it better.I haven't dealed with the case that when we input multi-equation,my program will do the first and rerun by giving "$\ll$"(I use it to indicate inputing).After "$\ll$" it will sent "= " and the result of the second.And it is the same for the third and followings.It looks not good and I haven't thought out a feasible way.
+
+\subsection{LaTex}
+I just want to ask for some questions about it.
+
+\subsubsection{Matrix}
+How can I write a matrix with some lines to represent the block matrix.I searched for some ways but the compiling failed.The way I use in my writing before is "array",but it will show in the center while I don't want that.Besides,how to add subscript and superscript to the elements in a matrix?
+
+\subsubsection{superscript}
+The order to output times sign by using "\ times" in the superscript failed.But I have no idea about why that would happen.And how to print backslash or some original syntax that I don't want be compiled?I want to print that but the output goes nothing or send out error.
+
+\section{Plan for the next weeks}
+
+1.Learn the week7,week8,week9 courses of Linear Algebra.\\
+2.Keep on writing C++ programs.\\
+3.Keep on learning how to use LaTex.
+
+\end{document}
